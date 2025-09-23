@@ -20,6 +20,23 @@ public class Author : BaseModel
         // If the author has only one book, the name should be returned as is
         // If the author has no books, an empty string should be returned
         // TODO: 4.3 Implement the BooksToString method
+        if (Books.Count == 0)
+        {
+            return string.Empty;
+        }
+        else if (Books.Count == 1)
+        {
+            var book = Books.First();
+            return book.Title;
+        }
+        else
+        {
+            var bookTitles = Books.Select(x => x.Title).ToList();
+            var lastbook = bookTitles.Last();
+            bookTitles.RemoveAt(bookTitles.Count - 1);
+            return string.Join(", ", bookTitles) + " and " + lastbook;
+        }
+
         throw new NotImplementedException("Author.BooksToString is not implemented");
         // DO NOT MODIFY BELOW THIS LINE
     }

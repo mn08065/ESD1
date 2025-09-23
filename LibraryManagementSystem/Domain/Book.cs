@@ -44,7 +44,24 @@ namespace LibraryManagementSystem.Domain
             // If the book has only one author, the name should be returned as is or "unknown" if the author's name is null
             // If the book has no authors, an empty string should be returned
             // TODO: 1.2 Implement the AuthorsToString method
-            throw new NotImplementedException("Book.AuthorsToString is not implemented");
+            if (Authors.Count == 0)
+            {
+                return string.Empty;
+            }
+            else if (Authors.Count == 1)
+            {
+                var author = Authors.First();
+                return author.Name ?? "unknown";
+            }
+            else
+            {
+                var authorNames = Authors.Select(a => a.Name ?? "unknown").ToList();
+                var lastAuthor = authorNames.Last();
+                authorNames.RemoveAt(authorNames.Count - 1);
+                return string.Join(", ", authorNames) + " and " + lastAuthor;
+            }
+        
+            //throw new NotImplementedException("Book.AuthorsToString is not implemented");
             // DO NOT MODIFY BELOW THIS LINE
         }
     }

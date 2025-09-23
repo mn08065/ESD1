@@ -24,8 +24,12 @@ namespace LibraryManagementSystem.Domain
             // This method should return true if the book is not currently on loan (No entry in Loans collection)
             // or if it was on loan but has been returned (loan.ReturnDate is not null for all Loans)
             // TODO: 1.1 Implement the IsAvailable method
-
-            throw new NotImplementedException("Book.IsAvailable is not implemented");
+            if (Loans.Any(Loan => Loan.ReturnDate == null))
+            {
+                return false;
+            };
+            return true;
+            //throw new NotImplementedException("Book.IsAvailable is not implemented");
             // DO NOT MODIFY BELOW THIS LINE
         }
 

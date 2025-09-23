@@ -15,8 +15,12 @@ namespace LibraryManagementSystem.Domain
         {
             // DO NOT MODIFY ABOVE THIS LINE
             // TODO: 2. return true if the member has less than 3 loans that have not been returned
-
-            throw new NotImplementedException("Member.CanBorrow is not implemented");
+            if (LoanCount < 3)
+            {
+                return true;
+            }
+            return false;
+            //throw new NotImplementedException("Member.CanBorrow is not implemented");
             // DO NOT MODIFY BELOW THIS LINE
         }
 

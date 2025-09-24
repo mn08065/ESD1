@@ -30,17 +30,13 @@ public class AuthorsController(LibraryContext context) : Controller
     public IActionResult Add(Author author)
     {
         // DO NOT MODIFY ABOVE THIS LINE
-        // TODO: 11.2 Check if model is valid then add author to context and save changes, then redirect to Authors action
-            if (ModelState.IsValid)
-            {
-                context.Authors.Add(author);
-                context.SaveChanges();
-                return RedirectToAction("Authors");
-            }
-            return View(author);
-        // TODO: 11.3 Return the view with author if model is not valid, errors will be auto populated by the framework
-        
-        throw new NotImplementedException("AuthorsController.Add is not implemented");
+        if (ModelState.IsValid)
+        {
+            context.Authors.Add(author);
+            context.SaveChanges();
+            return RedirectToAction("Authors");
+        }
+        return View(author);
         // DO NOT MODIFY BELOW THIS LINE
     }
 
@@ -49,7 +45,7 @@ public class AuthorsController(LibraryContext context) : Controller
     {
         // DO NOT MODIFY ABOVE THIS LINE
         // TODO: 11.4 Check if author exists, remove author from context and save changes, then redirect to Authors action
-        
+
         // TODO: 11.5 Return NotFound() if author does not exist
         throw new NotImplementedException("AuthorsController.Delete is not implemented");
         // DO NOT MODIFY BELOW THIS LINE

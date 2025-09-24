@@ -31,18 +31,6 @@ public class BooksController(LibraryContext context) : Controller
     [HttpPost]
     public IActionResult Add(BookViewModel model)
     {
-        if (!Book.IsValidISBN(model.ISBN))
-        {
-            ModelState.AddModelError("ISBN", "ISBN must be 10 or 13 digits long without any letters.");
-        }
-
-
-        var existingBook = context.Books.FirstOrDefault(b => b.ISBN == model.ISBN);
-        if (existingBook != null)
-        {
-            ModelState.AddModelError("ISBN", "A book with this ISBN already exists.");
-        }
-
         if (ModelState.IsValid)
         {
             var book = new Book
@@ -56,6 +44,7 @@ public class BooksController(LibraryContext context) : Controller
             return RedirectToAction("Books");
         }
         model.AvailableAuthors = context.Authors.ToList();
+
         return View(model);
     }
 
@@ -81,10 +70,6 @@ public class BooksController(LibraryContext context) : Controller
     public IActionResult Update(BookViewModel model)
     {
 
-        if (!Book.IsValidISBN(model.ISBN))
-        {
-            ModelState.AddModelError("ISBN", "ISBN must be 10 or 13 digits long without any letters.");
-        }
 
         
 

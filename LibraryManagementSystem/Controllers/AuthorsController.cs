@@ -77,7 +77,14 @@ public class AuthorsController(LibraryContext context) : Controller
     {
         // DO NOT MODIFY ABOVE THIS LINE
         // TODO: 11.7 Check if model is valid then update author in context and save changes, then redirect to Authors action
-        throw new NotImplementedException("AuthorsController.Update is not implemented");
+        if(ModelState.IsValid)
+        {
+            context.Authors.Update(author);
+            context.SaveChanges();
+            return RedirectToAction("Authors");
+        }
+        return View(author); // have to check if this is needed or not
+        
         // DO NOT MODIFY BELOW THIS LINE
     }
 }

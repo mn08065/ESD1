@@ -45,9 +45,15 @@ public class AuthorsController(LibraryContext context) : Controller
     {
         // DO NOT MODIFY ABOVE THIS LINE
         // TODO: 11.4 Check if author exists, remove author from context and save changes, then redirect to Authors action
-
+        var author = context.Authors.Find(id);
+        if (author != null)
+        {
+            context.Authors.Remove(author);
+            context.SaveChanges();
+            return RedirectToAction("Authors");
+        }
         // TODO: 11.5 Return NotFound() if author does not exist
-        throw new NotImplementedException("AuthorsController.Delete is not implemented");
+            throw new NotImplementedException("AuthorsController.Delete is not implemented");
         // DO NOT MODIFY BELOW THIS LINE
     }
 

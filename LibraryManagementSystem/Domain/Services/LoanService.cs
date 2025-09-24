@@ -30,13 +30,13 @@ namespace LibraryManagementSystem.Domain.Services
             // TODO: 3.2 Check if member can borrow. If not, throw an InvalidOperationException with the message "The member has reached their borrowing limit."
             if (!member.CanBorrow())
             {
-                throw new InvalidOperationException( "The member has reached their borrowing limit.");
+                throw new InvalidOperationException("The member has reached their borrowing limit.");
             }
             // TODO: 3.3 Finally call the RecordLoan method on the member object and pass the loan object as an argument
+            member.RecordLoan(loan);
+            // DO NOT MODIFY BELOW THIS LINE
 
-                // DO NOT MODIFY BELOW THIS LINE
-
-                return loan;
+            return loan;
         }
 
         public void ReturnBook(Loan loan)

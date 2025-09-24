@@ -23,7 +23,6 @@ namespace LibraryManagementSystem.Domain
             // DO NOT MODIFY ABOVE THIS LINE
             // This method should return true if the book is not currently on loan (No entry in Loans collection)
             // or if it was on loan but has been returned (loan.ReturnDate is not null for all Loans)
-            // TODO: 1.1 Implement the IsAvailable method
             if (Loans.Any(Loan => Loan.ReturnDate == null))
             {
                 return false;
@@ -43,7 +42,6 @@ namespace LibraryManagementSystem.Domain
             // If the book has multiple authors, the names should be separated by commas and the last name should be preceded by 'and'
             // If the book has only one author, the name should be returned as is or "unknown" if the author's name is null
             // If the book has no authors, an empty string should be returned
-            // TODO: 1.2 Implement the AuthorsToString method
             if (Authors.Count == 0)
             {
                 return string.Empty;

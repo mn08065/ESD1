@@ -7,9 +7,38 @@
 
 @* DO NOT MODIFY ABOVE THIS LINE *@
 @* 
-TODO: 12. Follow the pattern in Views/Members/Members.cshtml and make a similar listing for Authors here
-Include Add, Update, and Delete actions.
-Author has two properties: Name and Books. Call the BooksToString() method to display the books.
 *@
+<h1>Authors</h1>
+
+<p>
+    <a href="@Url.Action("Add", "Authors")">Add Author</a>
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Books</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var author in Model)
+    {
+        <tr>
+            <td>@author.Name</td>
+            <td>@author.BooksToString()</td>
+            <td>
+                <a href="@Url.Action("Update", "Authors", new { id = author.Id })">Update</a>
+                |
+                <form asp-action="Delete" asp-controller="Authors" asp-route-id="@author.Id" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
 
 @* DO NOT MODIFY BELOW THIS LINE *@

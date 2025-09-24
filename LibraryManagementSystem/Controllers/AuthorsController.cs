@@ -2,6 +2,7 @@ using LibraryManagementSystem.Data;
 using LibraryManagementSystem.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace LibraryManagementSystem.Controllers;
 
@@ -12,7 +13,10 @@ public class AuthorsController(LibraryContext context) : Controller
         // DO NOT MODIFY ABOVE THIS LINE
         // TODO: 11.1 Fetch all authors and return list, include Books for each author and return the view with authors
         // Refer to similar listing for Members
-        throw new NotImplementedException("AuthorsController.Authors is not implemented");
+        var authors = context.Authors
+            .Include(a => a.Books)
+            .ToList();
+        return View(authors);
         // DO NOT MODIFY BELOW THIS LINE
     }
 
@@ -27,8 +31,15 @@ public class AuthorsController(LibraryContext context) : Controller
     {
         // DO NOT MODIFY ABOVE THIS LINE
         // TODO: 11.2 Check if model is valid then add author to context and save changes, then redirect to Authors action
-        
+            if (ModelState.IsValid)
+            {
+                context.Authors.Add(author);
+                context.SaveChanges();
+                return RedirectToAction("Authors");
+            }
+            return View(author);
         // TODO: 11.3 Return the view with author if model is not valid, errors will be auto populated by the framework
+        
         throw new NotImplementedException("AuthorsController.Add is not implemented");
         // DO NOT MODIFY BELOW THIS LINE
     }

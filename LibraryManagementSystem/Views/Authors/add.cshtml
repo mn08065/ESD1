@@ -5,7 +5,15 @@
 
 <h1>Add Author</h1>
 @* DO NOT MODIFY ABOVE THIS LINE *@
-@* TODO: 13. Add a form to add an author. You may want to refer to add.cshtml for Members *@
+
+<form asp-action="Add" method="post">
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <button type="submit">Add</button>
+</form>
 
 @* DO NOT MODIFY BELOW THIS LINE *@
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>

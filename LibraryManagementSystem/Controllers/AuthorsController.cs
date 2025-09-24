@@ -11,8 +11,6 @@ public class AuthorsController(LibraryContext context) : Controller
     public IActionResult Authors()
     {
         // DO NOT MODIFY ABOVE THIS LINE
-        // TODO: 11.1 Fetch all authors and return list, include Books for each author and return the view with authors
-        // Refer to similar listing for Members
         var authors = context.Authors
             .Include(a => a.Books)
             .ToList();
@@ -76,7 +74,6 @@ public class AuthorsController(LibraryContext context) : Controller
     public IActionResult Update(Author author)
     {
         // DO NOT MODIFY ABOVE THIS LINE
-        // TODO: 11.7 Check if model is valid then update author in context and save changes, then redirect to Authors action
         if(ModelState.IsValid)
         {
             context.Authors.Update(author);

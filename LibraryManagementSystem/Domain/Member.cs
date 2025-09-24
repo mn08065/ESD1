@@ -14,7 +14,6 @@ namespace LibraryManagementSystem.Domain
         public virtual bool CanBorrow()
         {
             // DO NOT MODIFY ABOVE THIS LINE
-            // TODO: 2. return true if the member has less than 3 loans that have not been returned
             if (LoanCount < 3)
             {
                 return true;

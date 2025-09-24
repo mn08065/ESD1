@@ -28,6 +28,10 @@ public class AuthorsController(LibraryContext context) : Controller
     public IActionResult Add(Author author)
     {
         // DO NOT MODIFY ABOVE THIS LINE
+        if (!Author.IsValidName(author.Name))
+        {
+            ModelState.AddModelError("Name", "Author name cannot be empty.");
+        }
         if (ModelState.IsValid)
         {
             context.Authors.Add(author);
@@ -42,7 +46,7 @@ public class AuthorsController(LibraryContext context) : Controller
     public IActionResult Delete(int id)
     {
         // DO NOT MODIFY ABOVE THIS LINE
-        
+
         var author = context.Authors.Find(id);
         if (author != null)
         {
@@ -50,7 +54,7 @@ public class AuthorsController(LibraryContext context) : Controller
             context.SaveChanges();
             return RedirectToAction("Authors");
         }
-    
+
         return NotFound();
         // DO NOT MODIFY BELOW THIS LINE
     }
@@ -59,14 +63,14 @@ public class AuthorsController(LibraryContext context) : Controller
     public IActionResult Update(int id)
     {
         // DO NOT MODIFY ABOVE THIS LINE
-        
+
         var author = context.Authors.Find(id);
         if (author == null)
         {
             return NotFound();
         }
         return View(author);
-        
+
         // DO NOT MODIFY BELOW THIS LINE
     }
 
@@ -74,14 +78,19 @@ public class AuthorsController(LibraryContext context) : Controller
     public IActionResult Update(Author author)
     {
         // DO NOT MODIFY ABOVE THIS LINE
-        if(ModelState.IsValid)
+        if (!Author.IsValidName(author.Name))
+        {
+            ModelState.AddModelError("Name", "Author name cannot be empty.");
+        }
+
+        if (ModelState.IsValid)
         {
             context.Authors.Update(author);
             context.SaveChanges();
             return RedirectToAction("Authors");
         }
         return View(author); // have to check if this is needed or not
-        
+
         // DO NOT MODIFY BELOW THIS LINE
     }
 }

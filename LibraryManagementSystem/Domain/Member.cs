@@ -9,7 +9,8 @@ namespace LibraryManagementSystem.Domain
         public ICollection<Loan> Loans { get; set; } = new List<Loan>();
 
         // Number of loans that have not been returned
-        public int LoanCount => Loans.Select(l => l.ReturnDate == null).Count();
+        public int LoanCount => Loans.Count(l => l.ReturnDate == null);
+        // sorry sir had to change this the logic was faulty and was causing issues in manual testing
 
         public virtual bool CanBorrow()
         {

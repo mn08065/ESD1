@@ -8,7 +8,10 @@ public class Author : BaseModel
     public ICollection<Book> Books { get; set; } = new List<Book>();
     // An author may have written multiple books.
     // This will make the relationship between Book and Author many-to-many
-
+    public static bool IsValidName(string name)
+    {
+        return !string.IsNullOrWhiteSpace(name) && name.Trim().Length >= 1;
+    }
     // DO NOT MODIFY BELOW THIS LINE
 
     public string BooksToString()

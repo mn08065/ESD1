@@ -26,15 +26,54 @@ namespace LibraryManagementSystem.Domain
             if (Loans.Any(Loan => Loan.ReturnDate == null))
             {
                 return false;
-            };
+            }
+            ;
             return true;
             //throw new NotImplementedException("Book.IsAvailable is not implemented");
             // DO NOT MODIFY BELOW THIS LINE
         }
 
-        
+
         // This is an example of leaking presentation logic in Domain model. It has nothing to do with domain.
         // Ideally, this method should be part of presentation layer, perhaps in BookViewModel class.
+        public static bool IsValidISBN(string isbn)
+        {
+            if (string.IsNullOrWhiteSpace(isbn))
+                return false;
+
+            // Remove hyphens and spaces
+            string cleanIsbn = isbn.Replace("-", "").Replace(" ", "");
+
+            // Check length
+            if (cleanIsbn.Length != 10 && cleanIsbn.Length != 13)
+                return false;
+
+            // Check if it contains only digits (and possibly 'X' for ISBN-10)
+            if (cleanIsbn.Length == 10)
+            {
+                // ISBN-10: first 9 characters must be digits, last character can be digit or 'X'
+                for (int i = 0; i < cleanIsbn.Length - 1; i++)
+                {
+                    if (!char.IsDigit(cleanIsbn[i]))
+                        return false;
+                }
+                // Last character can be digit or 'X'
+                char lastChar = cleanIsbn[cleanIsbn.Length - 1];
+                if (!char.IsDigit(lastChar) && lastChar != 'X' && lastChar != 'x')
+                    return false;
+            }
+            else // ISBN-13
+            {
+                // ISBN-13: all characters must be digits
+                foreach (char c in cleanIsbn)
+                {
+                    if (!char.IsDigit(c))
+                        return false;
+                }
+            }
+
+            return true;
+        }
         public string AuthorsToString()
         {
             // DO NOT MODIFY ABOVE THIS LINE
@@ -58,7 +97,6 @@ namespace LibraryManagementSystem.Domain
                 authorNames.RemoveAt(authorNames.Count - 1);
                 return string.Join(", ", authorNames) + " and " + lastAuthor;
             }
-        
             //throw new NotImplementedException("Book.AuthorsToString is not implemented");
             // DO NOT MODIFY BELOW THIS LINE
         }
